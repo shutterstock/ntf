@@ -1,0 +1,11 @@
+{
+  "name": "ntf",
+  "description": "A network testing framework",
+  "version": "0.0.1",
+  "engines": { "node": ">= 0.4" },
+  "dependencies": {
+    "nodeunit": ">= 0.5.3"
+  },
+  "bin" : { "ntf" : "./bin/ntf" },
+  "main": "lib/ntf/index"
+}
