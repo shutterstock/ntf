@@ -6,6 +6,11 @@
   "dependencies": {
     "nodeunit": ">= 0.5.3"
   },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/silas/ntf.git"
+  },
+  "bugs" : { "url" : "http://github.com/silas/ntf/issues" },
   "bin" : { "ntf" : "./bin/ntf" },
   "main": "lib/ntf/index"
 }
