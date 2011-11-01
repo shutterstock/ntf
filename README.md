@@ -8,13 +8,9 @@ ntf is a network testing framework.
   * [node](http://nodejs.org/)
   * [npm](http://npmjs.org/)
 
-### Usage
+### Install
 
-    # install dependencies
-    npm install
-
-    # run basic examples
-    bin/ntf examples/basic
+    npm install ntf
 
 ### License
 
