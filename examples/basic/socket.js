@@ -1,7 +1,7 @@
 var ntf = require('../../lib/ntf')
-  , test = ntf.socket.test(exports, 'silas.sewell.org')
+  , test = ntf.socket.test(exports, 'github.com')
 
-test.tcp('http', 80, function(test, socket) {
+test.tcp('github http', 80, function(test, socket) {
   test.connectionEstablished(socket)
   test.done()
 })
