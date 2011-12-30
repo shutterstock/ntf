@@ -1,2 +1,4 @@
+*.tar.*
+*.tgz
 *swp
 node_modules
