@@ -1,6 +1,6 @@
 {
   "name": "ntf",
-  "description": "A network testing framework",
+  "description": "Network Testing Framework",
   "version": "0.1.0",
   "engines": { "node": ">= 0.4" },
   "dependencies": {
