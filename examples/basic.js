@@ -1,1 +1,1 @@
-require('../lib/ntf/utils').export(exports, __dirname + '/basic')
+module.exports = require('../lib/ntf/utils').load(__dirname + '/basic')
