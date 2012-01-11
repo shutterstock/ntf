@@ -20,13 +20,13 @@ Test.prototype.deepEqual = function() {
   this.push('deepEqual', arguments)
 }
 
-Test.prototype.okEqual = function(value) {
+Test.prototype.assertOk = function(value) {
   var a = this.asserts.shift()
   this.test.equal(a.type, 'ok')
   this.test.ok(value == false ? !a.args[0] : a.args[0])
 }
 
-Test.prototype.equalEqual = function(value) {
+Test.prototype.assertEqual = function(value) {
   var a = this.asserts.shift()
   this.test.equal(a.type, 'equal')
   if (value === false) {
@@ -36,7 +36,7 @@ Test.prototype.equalEqual = function(value) {
   }
 }
 
-Test.prototype.deepEqualEqual = function(value) {
+Test.prototype.assertDeepEqual = function(value) {
   var a = this.asserts.shift()
   this.test.equal(a.type, 'deepEqual')
   if (value === false) {

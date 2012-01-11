@@ -11,16 +11,16 @@ exports.assertsStatusCode = function(test) {
     , mockTest = new mock.AssertTest(test, http)
 
   mockTest.statusCode(true, statusCode)
-  mockTest.equalEqual(false)
+  mockTest.assertEqual(false)
 
   mockTest.statusCode({}, statusCode)
-  mockTest.equalEqual(false)
+  mockTest.assertEqual(false)
 
   mockTest.statusCode({ statusCode: 500 }, statusCode)
-  mockTest.equalEqual(false)
+  mockTest.assertEqual(false)
 
   mockTest.statusCode({ statusCode: 200 }, statusCode)
-  mockTest.equalEqual()
+  mockTest.assertEqual()
 
   test.done()
 }
@@ -30,22 +30,22 @@ exports.assertsBody = function(test) {
     , mockTest = new mock.AssertTest(test, http)
 
   mockTest.body(true, content)
-  mockTest.okEqual(false)
+  mockTest.assertOk(false)
 
   mockTest.body({}, content)
-  mockTest.okEqual(false)
+  mockTest.assertOk(false)
 
   mockTest.body({ data: 'hello world' }, content)
-  mockTest.okEqual(false)
+  mockTest.assertOk(false)
 
   mockTest.body({ data: 'hello world$' }, content)
-  mockTest.okEqual()
+  mockTest.assertOk()
 
   mockTest.body({ data: 'hello world' }, /^world/)
-  mockTest.okEqual(false)
+  mockTest.assertOk(false)
 
   mockTest.body({ data: 'hello world' }, /world$/)
-  mockTest.okEqual()
+  mockTest.assertOk()
 
   test.done()
 }
@@ -55,25 +55,25 @@ exports.assertsJson = function(test) {
     , mockTest = new mock.AssertTest(test, http)
 
   mockTest.json(true)
-  mockTest.okEqual(false)
+  mockTest.assertOk(false)
 
   mockTest.json({})
-  mockTest.okEqual(false)
+  mockTest.assertOk(false)
 
   mockTest.json({ data: 'not json' })
-  mockTest.okEqual(false)
+  mockTest.assertOk(false)
 
   mockTest.json({ data: 'not json' }, content)
-  mockTest.okEqual(false)
-  mockTest.deepEqualEqual(false)
+  mockTest.assertOk(false)
+  mockTest.assertDeepEqual(false)
 
   mockTest.json({ data: '{"one":{"two":4}}' }, content)
-  mockTest.okEqual()
-  mockTest.deepEqualEqual(false)
+  mockTest.assertOk()
+  mockTest.assertDeepEqual(false)
 
   mockTest.json({ data: '{"one":{"two":3}}' }, content)
-  mockTest.okEqual()
-  mockTest.deepEqualEqual()
+  mockTest.assertOk()
+  mockTest.assertDeepEqual()
 
   test.done()
 }
