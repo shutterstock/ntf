@@ -3,6 +3,6 @@ var ntf = require('../../lib/ntf')
 
 test.get('ntf project page', '/silas/ntf', function(test, res) {
   test.statusCode(res, 200)
-  test.hasContent(res, 'ntf')
+  test.body(res, /<title>.*ntf.*<\/title>/)
   test.done()
 })
