@@ -2,7 +2,7 @@ var http = require('../lib/ntf/http')
   , mock = require('./assets/mock')
 
 exports.asserts = function(test) {
-  test.equal(Object.keys(http.asserts).length, 3)
+  test.equal(Object.keys(http.asserts).length, 4)
   test.done()
 }
 
@@ -46,6 +46,57 @@ exports.assertsBody = function(test) {
 
   mockTest.body({ data: 'hello world' }, /world$/)
   mockTest.assertOk()
+
+  test.done()
+}
+
+exports.assertsHeader = function(test) {
+  var mockTest = new mock.AssertTest(test, http)
+    , res = { headers: { 'content-length': '334' } }
+    , resCookie = { headers: { 'set-cookie': 'name=value' } }
+    , resCookies = { headers: { 'set-cookie': ['name1=value1', 'name2=value2'] } }
+
+  mockTest.header(true)
+  mockTest.assertOk(false)
+
+  mockTest.header({})
+  mockTest.assertOk(false)
+
+  mockTest.header(res)
+  mockTest.assertOk(false)
+
+  mockTest.header(res, 'name')
+  mockTest.assertOk(false)
+
+  mockTest.header(res, /name/)
+  mockTest.assertOk(false)
+
+  mockTest.header(res, 'content-length')
+  mockTest.assertOk(false)
+
+  mockTest.header(res, 'content-length', 334)
+  mockTest.assertOk(true)
+
+  mockTest.header(resCookie, 'set-cookie', 'name=value')
+  mockTest.assertOk(true)
+
+  mockTest.header(resCookies, 'set-cookie', 'name1=value1')
+  mockTest.assertOk(true)
+
+  mockTest.header(resCookies, 'set-cookie', 'name2=value2')
+  mockTest.assertOk(true)
+
+  test.equal(mockTest.header(resCookie, 'set-cookie', /name=(.*)/)[1], 'value')
+  mockTest.assertOk(true)
+
+  test.equal(mockTest.header(resCookies, 'set-cookie', /name1=(.*)/)[1], 'value1')
+  mockTest.assertOk(true)
+
+  test.equal(mockTest.header(resCookies, 'set-cookie', /name2=(.*)/)[1], 'value2')
+  mockTest.assertOk(true)
+
+  test.equal(mockTest.header(resCookies, 'set-cookie', /name3=(.*)/), null)
+  mockTest.assertOk(false)
 
   test.done()
 }
