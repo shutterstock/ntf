@@ -25,31 +25,6 @@ exports.assertsStatusCode = function(test) {
   test.done()
 }
 
-exports.assertsBody = function(test) {
-  var content = 'world$'
-    , mockTest = new mock.AssertTest(test, http)
-
-  mockTest.body(true, content)
-  mockTest.assertOk(false)
-
-  mockTest.body({}, content)
-  mockTest.assertOk(false)
-
-  mockTest.body({ data: 'hello world' }, content)
-  mockTest.assertOk(false)
-
-  mockTest.body({ data: 'hello world$' }, content)
-  mockTest.assertOk()
-
-  mockTest.body({ data: 'hello world' }, /^world/)
-  mockTest.assertOk(false)
-
-  mockTest.body({ data: 'hello world' }, /world$/)
-  mockTest.assertOk()
-
-  test.done()
-}
-
 exports.assertsHeader = function(test) {
   var mockTest = new mock.AssertTest(test, http)
     , res = { headers: { 'content-length': '334' } }
@@ -97,6 +72,31 @@ exports.assertsHeader = function(test) {
 
   test.equal(mockTest.header(resCookies, 'set-cookie', /name3=(.*)/), null)
   mockTest.assertOk(false)
+
+  test.done()
+}
+
+exports.assertsBody = function(test) {
+  var content = 'world$'
+    , mockTest = new mock.AssertTest(test, http)
+
+  mockTest.body(true, content)
+  mockTest.assertOk(false)
+
+  mockTest.body({}, content)
+  mockTest.assertOk(false)
+
+  mockTest.body({ data: 'hello world' }, content)
+  mockTest.assertOk(false)
+
+  mockTest.body({ data: 'hello world$' }, content)
+  mockTest.assertOk()
+
+  mockTest.body({ data: 'hello world' }, /^world/)
+  mockTest.assertOk(false)
+
+  mockTest.body({ data: 'hello world' }, /world$/)
+  mockTest.assertOk()
 
   test.done()
 }
