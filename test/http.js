@@ -10,19 +10,15 @@ exports.assertsStatusCode = function(test) {
   var statusCode = 200
     , mockTest = new mock.AssertTest(test, http)
 
-  mockTest._ntf = true
+  mockTest._ntf = { res: {} }
   mockTest.statusCode(statusCode)
   mockTest.assertEqual(false)
 
-  mockTest._ntf = {}
+  mockTest._ntf = { res: { statusCode: 500 } }
   mockTest.statusCode(statusCode)
   mockTest.assertEqual(false)
 
-  mockTest._ntf = { statusCode: 500 }
-  mockTest.statusCode(statusCode)
-  mockTest.assertEqual(false)
-
-  mockTest._ntf = { statusCode: 200 }
+  mockTest._ntf = { res: { statusCode: 200 } }
   mockTest.statusCode(statusCode)
   mockTest.assertEqual()
 
@@ -31,13 +27,9 @@ exports.assertsStatusCode = function(test) {
 
 exports.assertsHeader = function(test) {
   var mockTest = new mock.AssertTest(test, http)
-    , res = { headers: { 'content-length': '334' } }
-    , resCookie = { headers: { 'set-cookie': 'name=value' } }
-    , resCookies = { headers: { 'set-cookie': ['name1=value1', 'name2=value2'] } }
-
-  mockTest._ntf = true
-  mockTest.header()
-  mockTest.assertOk(false)
+    , res = { res: { headers: { 'content-length': '334' } } }
+    , resCookie = { res: { headers: { 'set-cookie': 'name=value' } } }
+    , resCookies = { res: { headers: { 'set-cookie': ['name1=value1', 'name2=value2'] } } }
 
   mockTest._ntf = {}
   mockTest.header()
@@ -97,10 +89,6 @@ exports.assertsHeader = function(test) {
 exports.assertsBody = function(test) {
   var content = 'world$'
     , mockTest = new mock.AssertTest(test, http)
-
-  mockTest._ntf = true
-  mockTest.body(content)
-  mockTest.assertOk(false)
 
   mockTest._ntf = {}
   mockTest.body(content)
