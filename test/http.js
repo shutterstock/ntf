@@ -10,16 +10,20 @@ exports.assertsStatusCode = function(test) {
   var statusCode = 200
     , mockTest = new mock.AssertTest(test, http)
 
-  mockTest.statusCode(true, statusCode)
+  mockTest._ntf = true
+  mockTest.statusCode(statusCode)
   mockTest.assertEqual(false)
 
-  mockTest.statusCode({}, statusCode)
+  mockTest._ntf = {}
+  mockTest.statusCode(statusCode)
   mockTest.assertEqual(false)
 
-  mockTest.statusCode({ statusCode: 500 }, statusCode)
+  mockTest._ntf = { statusCode: 500 }
+  mockTest.statusCode(statusCode)
   mockTest.assertEqual(false)
 
-  mockTest.statusCode({ statusCode: 200 }, statusCode)
+  mockTest._ntf = { statusCode: 200 }
+  mockTest.statusCode(statusCode)
   mockTest.assertEqual()
 
   test.done()
@@ -31,46 +35,60 @@ exports.assertsHeader = function(test) {
     , resCookie = { headers: { 'set-cookie': 'name=value' } }
     , resCookies = { headers: { 'set-cookie': ['name1=value1', 'name2=value2'] } }
 
-  mockTest.header(true)
+  mockTest._ntf = true
+  mockTest.header()
   mockTest.assertOk(false)
 
-  mockTest.header({})
+  mockTest._ntf = {}
+  mockTest.header()
   mockTest.assertOk(false)
 
-  mockTest.header(res)
+  mockTest._ntf = res
+  mockTest.header()
   mockTest.assertOk(false)
 
-  mockTest.header(res, 'name')
+  mockTest._ntf = res
+  mockTest.header('name')
   mockTest.assertOk(false)
 
-  mockTest.header(res, /name/)
+  mockTest._ntf = res
+  mockTest.header(/name/)
   mockTest.assertOk(false)
 
-  mockTest.header(res, 'content-length')
+  mockTest._ntf = res
+  mockTest.header('content-length')
   mockTest.assertOk(false)
 
-  mockTest.header(res, 'content-length', 334)
+  mockTest._ntf = res
+  mockTest.header('content-length', 334)
   mockTest.assertOk(true)
 
-  mockTest.header(resCookie, 'set-cookie', 'name=value')
+  mockTest._ntf = resCookie
+  mockTest.header('set-cookie', 'name=value')
   mockTest.assertOk(true)
 
-  mockTest.header(resCookies, 'set-cookie', 'name1=value1')
+  mockTest._ntf = resCookies
+  mockTest.header('set-cookie', 'name1=value1')
   mockTest.assertOk(true)
 
-  mockTest.header(resCookies, 'set-cookie', 'name2=value2')
+  mockTest._ntf = resCookies
+  mockTest.header('set-cookie', 'name2=value2')
   mockTest.assertOk(true)
 
-  test.equal(mockTest.header(resCookie, 'set-cookie', /name=(.*)/)[1], 'value')
+  mockTest._ntf = resCookie
+  test.equal(mockTest.header('set-cookie', /name=(.*)/)[1], 'value')
   mockTest.assertOk(true)
 
-  test.equal(mockTest.header(resCookies, 'set-cookie', /name1=(.*)/)[1], 'value1')
+  mockTest._ntf = resCookies
+  test.equal(mockTest.header('set-cookie', /name1=(.*)/)[1], 'value1')
   mockTest.assertOk(true)
 
-  test.equal(mockTest.header(resCookies, 'set-cookie', /name2=(.*)/)[1], 'value2')
+  mockTest._ntf = resCookies
+  test.equal(mockTest.header('set-cookie', /name2=(.*)/)[1], 'value2')
   mockTest.assertOk(true)
 
-  test.equal(mockTest.header(resCookies, 'set-cookie', /name3=(.*)/), null)
+  mockTest._ntf = resCookie
+  test.equal(mockTest.header('set-cookie', /name3=(.*)/), null)
   mockTest.assertOk(false)
 
   test.done()
@@ -80,22 +98,28 @@ exports.assertsBody = function(test) {
   var content = 'world$'
     , mockTest = new mock.AssertTest(test, http)
 
-  mockTest.body(true, content)
+  mockTest._ntf = true
+  mockTest.body(content)
   mockTest.assertOk(false)
 
-  mockTest.body({}, content)
+  mockTest._ntf = {}
+  mockTest.body(content)
   mockTest.assertOk(false)
 
-  mockTest.body({ data: 'hello world' }, content)
+  mockTest._ntf = { data: 'hello world' }
+  mockTest.body(content)
   mockTest.assertOk(false)
 
-  mockTest.body({ data: 'hello world$' }, content)
+  mockTest._ntf = { data: 'hello world$' }
+  mockTest.body(content)
   mockTest.assertOk()
 
-  mockTest.body({ data: 'hello world' }, /^world/)
+  mockTest._ntf = { data: 'hello world' }
+  mockTest.body(/^world/)
   mockTest.assertOk(false)
 
-  mockTest.body({ data: 'hello world' }, /world$/)
+  mockTest._ntf = { data: 'hello world' }
+  mockTest.body(/world$/)
   mockTest.assertOk()
 
   test.done()
@@ -105,24 +129,30 @@ exports.assertsJson = function(test) {
   var content = { one: { two: 3 } }
     , mockTest = new mock.AssertTest(test, http)
 
-  mockTest.json(true)
+  mockTest._ntf = true
+  mockTest.json()
   mockTest.assertOk(false)
 
-  mockTest.json({})
+  mockTest._ntf = {}
+  mockTest.json()
   mockTest.assertOk(false)
 
-  mockTest.json({ data: 'not json' })
+  mockTest._ntf = { data: 'not json' }
+  mockTest.json()
   mockTest.assertOk(false)
 
-  mockTest.json({ data: 'not json' }, content)
+  mockTest._ntf = { data: 'not json' }
+  mockTest.json(content)
   mockTest.assertOk(false)
   mockTest.assertDeepEqual(false)
 
-  mockTest.json({ data: '{"one":{"two":4}}' }, content)
+  mockTest._ntf = { data: '{"one":{"two":4}}' }
+  mockTest.json(content)
   mockTest.assertOk()
   mockTest.assertDeepEqual(false)
 
-  mockTest.json({ data: '{"one":{"two":3}}' }, content)
+  mockTest._ntf = { data: '{"one":{"two":3}}' }
+  mockTest.json(content)
   mockTest.assertOk()
   mockTest.assertDeepEqual()
 
