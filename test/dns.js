@@ -10,31 +10,31 @@ exports.assertsAddress = function(test) {
   var address = '127.0.0.1'
     , mockTest = new mock.AssertTest(test, dns)
 
-  mockTest._ntf = true
-  mockTest.address(address)
-  mockTest.assertOk(false)
-
   mockTest._ntf = {}
   mockTest.address(address)
   mockTest.assertOk(false)
 
-  mockTest._ntf = { type: 'a', answer: [] }
+  mockTest._ntf = { res: {} }
   mockTest.address(address)
   mockTest.assertOk(false)
 
-  mockTest._ntf = { type: 'a', answer: '127.0.0.1' }
+  mockTest._ntf = { res: { type: 'a', answer: [] } }
   mockTest.address(address)
   mockTest.assertOk(false)
 
-  mockTest._ntf = { answer: ['127.0.0.1'] }
+  mockTest._ntf = { res: { type: 'a', answer: '127.0.0.1' } }
   mockTest.address(address)
   mockTest.assertOk(false)
 
-  mockTest._ntf = { type: 'a', answer: ['127.0.0.1'] }
+  mockTest._ntf = { res: { answer: ['127.0.0.1'] } }
+  mockTest.address(address)
+  mockTest.assertOk(false)
+
+  mockTest._ntf = { res: { type: 'a', answer: ['127.0.0.1'] } }
   mockTest.address(address)
   mockTest.assertOk()
 
-  mockTest._ntf = { type: 'aaaa', answer: ['127.0.0.1'] }
+  mockTest._ntf = { res: { type: 'aaaa', answer: ['127.0.0.1'] } }
   mockTest.address(address)
   mockTest.assertOk()
 
@@ -45,35 +45,31 @@ exports.assertsName = function(test) {
   var name = 'example.org'
     , mockTest = new mock.AssertTest(test, dns)
 
-  mockTest._ntf = true
-  mockTest.name(name)
-  mockTest.assertOk(false)
-
   mockTest._ntf = {}
   mockTest.name(name)
   mockTest.assertOk(false)
 
-  mockTest._ntf = { type: 'cname', answer: [] }
+  mockTest._ntf = { res: { type: 'cname', answer: [] } }
   mockTest.name(name)
   mockTest.assertOk(false)
 
-  mockTest._ntf = { type: 'cname', answer: 'example.org' }
+  mockTest._ntf = { res: { type: 'cname', answer: 'example.org' } }
   mockTest.name(name)
   mockTest.assertOk(false)
 
-  mockTest._ntf = { answer: ['example.org'] }
+  mockTest._ntf = { res: { answer: ['example.org'] } }
   mockTest.name(name)
   mockTest.assertOk(false)
 
-  mockTest._ntf = { type: 'cname', answer: ['example.org'] }
+  mockTest._ntf = { res: { type: 'cname', answer: ['example.org'] } }
   mockTest.name(name)
   mockTest.assertOk()
 
-  mockTest._ntf = { type: 'ns', answer: ['example.org'] }
+  mockTest._ntf = { res: { type: 'ns', answer: ['example.org'] } }
   mockTest.name(name)
   mockTest.assertOk()
 
-  mockTest._ntf = { type: 'ptr', answer: ['example.org'] }
+  mockTest._ntf = { res: { type: 'ptr', answer: ['example.org'] } }
   mockTest.name(name)
   mockTest.assertOk()
 
