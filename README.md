@@ -22,11 +22,11 @@ Create test file
 
     cat << EOF > silas.sewell.org.js
     var ntf = require('ntf')
-      , test = ntf.http.test(exports, 'http://silas.sewell.org')
+      , test = ntf.http('http://silas.sewell.org')
 
-    test.get('homepage', '/', function(test, res) {
-      test.statusCode(res, 200)
-      test.body(res, 'Silas Sewell')
+    exports.homepage = test.get('/', function(test, res) {
+      test.statusCode(200)
+      test.body('Silas Sewell')
       test.done()
     })
     EOF
