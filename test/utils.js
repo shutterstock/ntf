@@ -2,11 +2,6 @@ var utils = require('../lib/ntf/utils')
 
 var loadPath = __dirname + '/assets/load'
 
-exports.SEP = function(test) {
-  test.equal(utils.SEP, ' :: ')
-  test.done()
-}
-
 exports.load = function(test) {
   var data = utils.load(loadPath)
 
