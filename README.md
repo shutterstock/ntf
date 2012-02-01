@@ -1,12 +1,7 @@
 ntf
 ===
 
-ntf is a network testing framework.
-
-### Requirements
-
-  * [node](http://nodejs.org/)
-  * [npm](http://npmjs.org/)
+ntf is a network testing framework written in [node.js](http://nodejs.org/).
 
 ### Usage
 
@@ -18,9 +13,8 @@ Add node\_modules to path
 
     export PATH="./node_modules/.bin:$PATH"
 
-Create test file
+Create file `silas.sewell.org.js`
 
-    cat << EOF > silas.sewell.org.js
     var ntf = require('ntf')
       , test = ntf.http('http://silas.sewell.org')
 
@@ -29,7 +23,6 @@ Create test file
       test.body('Silas Sewell')
       test.done()
     })
-    EOF
 
 Run tests
 
