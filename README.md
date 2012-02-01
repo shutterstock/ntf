@@ -9,11 +9,11 @@ Install ntf
 
     npm install ntf
 
-Add node\_modules to path
+Add node\_modules to your path
 
     export PATH="./node_modules/.bin:$PATH"
 
-Create file `silas.sewell.org.js`
+Create a file named `silas.sewell.org.js`
 
     var ntf = require('ntf')
       , test = ntf.http('http://silas.sewell.org')
@@ -24,7 +24,7 @@ Create file `silas.sewell.org.js`
       test.done()
     })
 
-Run tests
+Run the tests
 
     ntf silas.sewell.org.js
 
