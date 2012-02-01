@@ -18,7 +18,7 @@ Create a file named `silas.sewell.org.js`
     var ntf = require('ntf')
       , test = ntf.http('http://silas.sewell.org')
 
-    exports.homepage = test.get('/', function(test, res) {
+    exports.homepage = test.get('/', function(test) {
       test.statusCode(200)
       test.body('Silas Sewell')
       test.done()
