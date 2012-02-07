@@ -7,6 +7,6 @@ exports.silasGithubA = test.a('silas.github.com', function(test) {
 })
 
 exports.silasSewellCname = test.cname('silas.sewell.org', function(test) {
-  test.name('ghs.google.com')
+  test.name('silas.github.com')
   test.done()
 })
