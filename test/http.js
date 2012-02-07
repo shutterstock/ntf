@@ -32,12 +32,10 @@ exports.assertsHeader = function(test) {
     , resCookies = { res: { headers: { 'set-cookie': ['name1=value1', 'name2=value2'] } } }
 
   mockTest._ntf = {}
-  mockTest.header()
-  mockTest.assertOk(false)
+  test.equal(mockTest.header(), undefined)
 
   mockTest._ntf = res
-  mockTest.header()
-  mockTest.assertOk(false)
+  test.deepEqual(mockTest.header(), res.res.headers)
 
   mockTest._ntf = res
   mockTest.header('name')
@@ -48,8 +46,8 @@ exports.assertsHeader = function(test) {
   mockTest.assertOk(false)
 
   mockTest._ntf = res
-  mockTest.header('content-length')
-  mockTest.assertOk(false)
+  test.equal(mockTest.header('content-length'), '334')
+  mockTest.assertOk(true)
 
   mockTest._ntf = res
   mockTest.header('content-length', 334)
