@@ -1,12 +1,12 @@
 var ntf = require('../../lib/ntf')
   , test = ntf.dns()
 
-exports.silasGithubA = test.a('silas.github.com', function(test) {
+exports.silasGithubCom = test.a('silas.github.com', function(test) {
   test.address('207.97.227.245')
   test.done()
 })
 
-exports.silasSewellCname = test.cname('silas.sewell.org', function(test) {
+exports.silasSewellOrg = test.cname('silas.sewell.org', function(test) {
   test.name('silas.github.com')
   test.done()
 })
