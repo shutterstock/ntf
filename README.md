@@ -1,7 +1,7 @@
 ntf
 ===
 
-ntf is a network testing framework written in [node.js](http://nodejs.org/).
+ntf is a network testing framework written in [Node.js](http://nodejs.org/).
 
 ### Usage
 
