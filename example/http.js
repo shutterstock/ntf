@@ -1,4 +1,4 @@
-var ntf = require('../../lib/ntf')
+var ntf = require('../lib/ntf')
   , test = ntf.http('https://github.com')
 
 exports.ntf = test.get('/silas/ntf', function(test) {

@@ -1,4 +1,4 @@
-var ntf = require('../../lib/ntf')
+var ntf = require('../lib/ntf')
   , test = ntf.dns()
 
 exports.silasGithubCom = test.a('silas.github.com', function(test) {
