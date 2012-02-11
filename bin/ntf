@@ -1,24 +1,24 @@
 #!/usr/bin/env node
 
-var nodeunit = require('nodeunit')
-  , args = process.argv.slice(2)
-  , files = []
+var nodeunit = require('nodeunit'),
+  args = process.argv.slice(2),
+  files = [];
 
 var usage = 'Usage: ntf [options] tests...\n\n' +
             'Options:\n' +
-            '  -h, --help        display this help and exit'
+            '  -h, --help        display this help and exit';
 
-args.forEach(function(arg) {
-  if (arg.substring(0, 1) != '-') {
-    files.push(arg)
-  } else if (arg == '-h' || arg == '--help') {
-    console.log(usage)
-    process.exit(0)
+args.forEach(function (arg) {
+  if (arg.substring(0, 1) !== '-') {
+    files.push(arg);
+  } else if (arg === '-h' || arg === '--help') {
+    console.log(usage);
+    process.exit(0);
   } else {
-    console.log(usage + '\n')
-    console.log('Unknown argument: ' + arg)
-    process.exit(1)
+    console.log(usage + '\n');
+    console.log('Unknown argument: ' + arg);
+    process.exit(1);
   }
-})
+});
 
-nodeunit.reporters.default.run(files)
+nodeunit.reporters.default.run(files);
