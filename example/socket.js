@@ -1,4 +1,4 @@
-var ntf = require('../lib/ntf')
+var ntf = require('../lib')
   , test = ntf.socket('github.com')
 
 exports.github = test.tcp(80, function(test) {

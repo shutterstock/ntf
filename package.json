@@ -12,5 +12,5 @@
   },
   "bugs" : { "url" : "http://github.com/silas/ntf/issues" },
   "bin" : { "ntf" : "./bin/ntf" },
-  "main": "lib/ntf/index"
+  "main": "./lib/index"
 }

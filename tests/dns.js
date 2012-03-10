@@ -1,4 +1,4 @@
-var dns = require('../lib/ntf/dns')
+var dns = require('../lib/dns')
   , mock = require('./assets/mock')
 
 exports.asserts = function(test) {

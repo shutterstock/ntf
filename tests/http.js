@@ -1,4 +1,4 @@
-var http = require('../lib/ntf/http')
+var http = require('../lib/http')
   , mock = require('./assets/mock')
 
 exports.asserts = function(test) {
