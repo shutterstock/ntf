@@ -2,7 +2,7 @@ var http = require('../lib/http')
   , mock = require('./assets/mock')
 
 exports.asserts = function(test) {
-  test.equal(Object.keys(http.asserts).length, 4)
+  test.equal(Object.keys(http.asserts).length, 5)
   test.done()
 }
 
@@ -141,6 +141,49 @@ exports.assertsJson = function(test) {
   mockTest.json(content)
   mockTest.assertOk()
   mockTest.assertDeepEqual()
+
+  test.done()
+}
+
+exports.assertsJsonPath = function(test) {
+  var mockTest = new mock.AssertTest(test, http)
+
+  mockTest.ntf = true
+  mockTest.jsonPath()
+  mockTest.assertOk(false)
+
+  mockTest.ntf = {}
+  mockTest.jsonPath()
+  mockTest.assertOk(false)
+
+  mockTest.ntf = { data: 'not json' }
+  mockTest.jsonPath()
+  mockTest.assertOk(false)
+
+  mockTest.ntf = { data: 'not json' }
+  mockTest.jsonPath('$.one.two', 3)
+  mockTest.assertOk(false)
+  mockTest.assertDeepEqual(false)
+
+  mockTest.ntf = { data: '{ "one": { "two": 3 }, "three": { "two": 2 } }' }
+
+  mockTest.jsonPath('$.one', { two: 3 })
+  mockTest.assertOk(true)
+  mockTest.assertDeepEqual(true)
+
+  mockTest.jsonPath('$.one.two', 3)
+  mockTest.assertOk(true)
+  mockTest.assertDeepEqual(true)
+
+  mockTest.jsonPath('$.*.two', 3, 2)
+  mockTest.assertOk(true)
+  mockTest.assertDeepEqual(true)
+  mockTest.assertDeepEqual(true)
+
+  mockTest.jsonPath('$.*.two', 2, 2)
+  mockTest.assertOk(true)
+  mockTest.assertDeepEqual(false)
+  mockTest.assertDeepEqual(true)
 
   test.done()
 }
