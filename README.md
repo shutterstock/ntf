@@ -3,15 +3,11 @@ ntf
 
 ntf is a network testing framework written in [Node.js](http://nodejs.org/).
 
-### Usage
+### Getting Started
 
 Install ntf
 
-    npm install ntf
-
-Add node\_modules to your path
-
-    export PATH="./node_modules/.bin:$PATH"
+    npm install -g ntf
 
 Create a file named `silas.sewell.org.js`
 
