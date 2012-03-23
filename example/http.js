@@ -1,7 +1,7 @@
 var ntf = require('../lib')
-  , test = ntf.http('https://github.com')
+  , test = ntf.http('http://ntfjs.org')
 
-exports.ntf = test.get('/silas/ntf', function(test) {
+exports.homepage = test.get('/', function(test) {
   test.statusCode(200)
   test.header('Server', /nginx\/[\d.]+/)
   test.body('ntf')

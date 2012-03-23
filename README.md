@@ -9,20 +9,20 @@ Install ntf
 
     npm install -g ntf
 
-Create a file named `silas.sewell.org.js`
+Create a file named `ntfjs.org.js`
 
     var ntf = require('ntf')
-      , test = ntf.http('http://silas.sewell.org')
+      , test = ntf.http('http://ntfjs.org')
 
     exports.homepage = test.get('/', function(test) {
       test.statusCode(200)
-      test.body('Silas Sewell')
+      test.body('ntf')
       test.done()
     })
 
 Run the tests
 
-    ntf silas.sewell.org.js
+    ntf ntfjs.org.js
 
 ### License
 
