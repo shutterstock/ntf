@@ -3,10 +3,12 @@
 var nodeunit = require('nodeunit')
   , args = process.argv.slice(2)
   , files = []
+  , verbose = false
 
 var usage = 'Usage: ntf [options] tests...\n\n' +
             'Options:\n' +
-            '  -h, --help        display this help and exit'
+            '  -h, --help        display this help and exit\n' +
+            '  -v, --verbose     verbose results'
 
 args.forEach(function (arg) {
   if (arg.substring(0, 1) !== '-') {
@@ -14,6 +16,8 @@ args.forEach(function (arg) {
   } else if (arg === '-h' || arg === '--help') {
     console.log(usage)
     process.exit(0)
+  } else if (arg === '-v' || arg === '--verbose') {
+    verbose = true
   } else {
     console.log(usage + '\n')
     console.log('Unknown argument: ' + arg)
@@ -21,4 +25,4 @@ args.forEach(function (arg) {
   }
 });
 
-nodeunit.reporters.default.run(files)
+nodeunit.reporters[verbose ? 'verbose' : 'default'].run(files)
