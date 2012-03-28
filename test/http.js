@@ -92,19 +92,19 @@ exports.assertsBody = function(test) {
   mockTest.body(content)
   mockTest.assertOk(false)
 
-  mockTest.ntf = { data: 'hello world' }
+  mockTest.ntf = { body: 'hello world' }
   mockTest.body(content)
   mockTest.assertOk(false)
 
-  mockTest.ntf = { data: 'hello world$' }
+  mockTest.ntf = { body: 'hello world$' }
   mockTest.body(content)
   mockTest.assertOk()
 
-  mockTest.ntf = { data: 'hello world' }
+  mockTest.ntf = { body: 'hello world' }
   mockTest.body(/^world/)
   mockTest.assertOk(false)
 
-  mockTest.ntf = { data: 'hello world' }
+  mockTest.ntf = { body: 'hello world' }
   mockTest.body(/world$/)
   mockTest.assertOk()
 
@@ -123,21 +123,21 @@ exports.assertsJson = function(test) {
   mockTest.json()
   mockTest.assertOk(false)
 
-  mockTest.ntf = { data: 'not json' }
+  mockTest.ntf = { body: 'not json' }
   mockTest.json()
   mockTest.assertOk(false)
 
-  mockTest.ntf = { data: 'not json' }
+  mockTest.ntf = { body: 'not json' }
   mockTest.json(content)
   mockTest.assertOk(false)
   mockTest.assertDeepEqual(false)
 
-  mockTest.ntf = { data: '{"one":{"two":4}}' }
+  mockTest.ntf = { body: '{"one":{"two":4}}' }
   mockTest.json(content)
   mockTest.assertOk()
   mockTest.assertDeepEqual(false)
 
-  mockTest.ntf = { data: '{"one":{"two":3}}' }
+  mockTest.ntf = { body: '{"one":{"two":3}}' }
   mockTest.json(content)
   mockTest.assertOk()
   mockTest.assertDeepEqual()
@@ -156,16 +156,16 @@ exports.assertsJsonPath = function(test) {
   mockTest.jsonPath()
   mockTest.assertOk(false)
 
-  mockTest.ntf = { data: 'not json' }
+  mockTest.ntf = { body: 'not json' }
   mockTest.jsonPath()
   mockTest.assertOk(false)
 
-  mockTest.ntf = { data: 'not json' }
+  mockTest.ntf = { body: 'not json' }
   mockTest.jsonPath('$.one.two', 3)
   mockTest.assertOk(false)
   mockTest.assertDeepEqual(false)
 
-  mockTest.ntf = { data: '{ "one": { "two": 3 }, "three": { "two": 2 } }' }
+  mockTest.ntf = { body: '{ "one": { "two": 3 }, "three": { "two": 2 } }' }
 
   mockTest.jsonPath('$.one', { two: 3 })
   mockTest.assertOk(true)
