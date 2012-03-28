@@ -1,7 +1,7 @@
 {
   "name": "ntf",
   "description": "Network Testing Framework",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "engines": { "node": ">= 0.4" },
   "dependencies": {
     "JSONPath": ">= 0.8.5",
