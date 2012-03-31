@@ -2,7 +2,7 @@ var http = require('../lib/http')
   , mock = require('./assets/mock')
 
 exports.asserts = function(test) {
-  test.equal(Object.keys(http.asserts).length, 5)
+  test.equal(Object.keys(http.asserts).length, 6)
   test.done()
 }
 
@@ -181,6 +181,80 @@ exports.assertsJsonPath = function(test) {
   mockTest.jsonPath('$.*.two', 2, 2)
   mockTest.assertDeepEqual(false)
   mockTest.assertDeepEqual(true)
+
+  test.done()
+}
+
+exports.assertsCookie = function(test) {
+  var mockTest = new mock.AssertTest(test, http)
+    , resCookie = { headers: { 'set-cookie': 'name=value; path=/; expires=Mon, 30-Apr-2012 04:21:16 GMT' } }
+    , resCookies = { headers: { 'set-cookie': [
+        'name1=value05%3B%3D%3Bvalue10; expires=Sun, 30-Sep-2012 16:41:40 GMT; path=/; domain=.example.com; HttpOnly',
+        'name2=value2; path=/; expires=Sat, 01-Jan-2022 00:00:00 GMT; secure; HttpOnly'
+      ] } }
+    , resCookieDecoded = { name: { value: 'value', path: '/', expires: 1335759676000 } }
+
+  mockTest.ntf = {}
+  test.deepEqual(mockTest.cookie(), {})
+  mockTest.assertOk(false) // cookie header
+
+  mockTest.ntf = { res: { headers: {} }}
+  test.deepEqual(mockTest.cookie(), {})
+  mockTest.assertOk(false) // cookie header
+
+  mockTest.ntf = { res: { headers: { 'set-cookie': [] } }}
+  test.deepEqual(mockTest.cookie(), {})
+  mockTest.assertOk(true) // cookie header
+
+  mockTest.ntf = {}
+  mockTest.cookie('name')
+  mockTest.assertOk(false) // cookie header
+  mockTest.assertOk(false) // cookie exists
+
+  mockTest.ntf = { res: resCookie }
+  test.deepEqual(mockTest.cookie(), resCookieDecoded)
+  mockTest.assertOk(true) // cookie header
+
+  mockTest.ntf = { res: resCookie }
+  mockTest.cookie('name1')
+  mockTest.assertOk(true) // cookie header
+  mockTest.assertOk(false) // cookie exists
+
+  mockTest.ntf = { res: resCookie }
+  mockTest.cookie(/name1/)
+  mockTest.assertOk(true) // cookie header
+  mockTest.assertOk(false) // cookie exists
+
+  mockTest.ntf = { res: resCookie }
+  test.deepEqual(mockTest.cookie('name'), resCookieDecoded.name)
+  mockTest.assertOk(true) // cookie header
+  mockTest.assertOk(true) // cookie exists
+
+  mockTest.ntf = { res: resCookie }
+  mockTest.cookie('name', 'value')
+  mockTest.assertOk(true) // cookie header
+  mockTest.assertOk(true) // cookie equal
+
+  mockTest.ntf = { res: resCookies }
+  mockTest.cookie('name1', 'nope')
+  mockTest.assertOk(true) // cookie header
+  mockTest.assertOk(false) // cookie equal
+  mockTest.cookie('name2', 'value2')
+  mockTest.assertOk(true) // cookie equal
+
+  mockTest.ntf = { res: resCookies }
+  mockTest.cookie('name1', 'value05;=;value10')
+  mockTest.assertOk(true) // cookie header
+  mockTest.assertOk(true) // cookie equal
+  mockTest.cookie('name2', 'value2')
+  mockTest.assertOk(true) // cookie equal
+
+  mockTest.ntf = { res: resCookies }
+  test.equal(mockTest.cookie('name1', /value\d+;=;value(\d+)/)[1], '10')
+  mockTest.assertOk(true) // cookie header
+  mockTest.assertOk(true) // cookie equal
+  test.equal(mockTest.cookie('name2', /(\d+)/)[1], '2')
+  mockTest.assertOk(true) // cookie equal
 
   test.done()
 }
