@@ -172,16 +172,13 @@ exports.assertsJsonPath = function(test) {
   mockTest.assertDeepEqual(true)
 
   mockTest.jsonPath('$.one.two', 3)
-  mockTest.assertOk(true)
   mockTest.assertDeepEqual(true)
 
   mockTest.jsonPath('$.*.two', 3, 2)
-  mockTest.assertOk(true)
   mockTest.assertDeepEqual(true)
   mockTest.assertDeepEqual(true)
 
   mockTest.jsonPath('$.*.two', 2, 2)
-  mockTest.assertOk(true)
   mockTest.assertDeepEqual(false)
   mockTest.assertDeepEqual(true)
 
