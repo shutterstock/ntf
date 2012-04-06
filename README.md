@@ -8,7 +8,7 @@ ntf is a network testing framework written in [Node.js](http://nodejs.org/).
 Install ntf
 
     npm install ntf
-    npm install -g ntf
+    npm install ntf -g
 
 Create a file named `ntfjs.org.js`
 
