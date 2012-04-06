@@ -7,6 +7,9 @@
     "JSONPath": ">= 0.8.5",
     "nodeunit": ">= 0.5.3"
   },
+  "devDependencies": {
+    "nock": ">= 0.11.6"
+  },
   "repository": {
     "type": "git",
     "url": "http://github.com/silas/ntf.git"

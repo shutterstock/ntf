@@ -1,5 +1,6 @@
 var http = require('../lib/http')
   , mock = require('./assets/mock')
+  , nock = require('nock')
 
 exports.asserts = function(test) {
   test.equal(Object.keys(http.asserts).length, 6)
@@ -192,7 +193,7 @@ exports.assertsCookie = function(test) {
         'name1=value1; expires=Sun, 30-Sep-2012 16:41:40 GMT; path=/; domain=.example.com; HttpOnly',
         'name2=value2; path=/; expires=Sat, 01-Jan-2022 00:00:00 GMT; secure; HttpOnly'
       ] } }
-    , resCookieDecoded = { name: { value: 'value', path: '/', expires: 1335759676000 } }
+    , resCookieDecoded = { name: { value: 'value', path: '/', expires: new Date(1335759676000) } }
 
   mockTest.ntf = { res: resCookie }
   mockTest.cookie('name1')
@@ -229,4 +230,65 @@ exports.assertsCookie = function(test) {
   mockTest.assertOk(true)
 
   test.done()
+}
+
+exports.httpGet = function(test) {
+  var mt = new mock.HttpAssertTest(test, http)
+    , opts = { url: 'http://example.org', jar: true }
+
+  mt._ntf.parentOpts = opts
+
+  nock(opts.url)
+    .get('/')
+    .reply(200, 'hello world', {
+      'set-cookie': [
+        'name1=value; path=/; expires=Mon, 30-Apr-2012 04:21:16 GMT',
+        'name2=value2; path=/; expires=Mon, 30-Apr-2012 04:21:16 GMT'
+      ]
+    })
+    .get('/one')
+    .reply(404, { message: 'not found' }, {
+      'set-cookie': 'name1=value1; path=/; expires=Mon, 30-Apr-2012 04:21:16 GMT',
+      'content-type': 'application/json'
+    })
+    .get('/two')
+    .reply(200, '')
+
+  http.get(mt, opts, function(mt) {
+    // status
+    mt.statusCode(200)
+    mt.assertEqual(true)
+    mt.statusCode(500)
+    mt.assertEqual(false)
+    // body
+    mt.body('hello')
+    mt.assertOk(true)
+    test.equal(mt.body(/^hello (.*)$/)[1], 'world')
+    mt.assertOk(true)
+    // cookie
+    test.deepEqual(mt.cookie('name1'), {
+      value: 'value',
+      path: '/',
+      expires: new Date(1335759676000)
+    })
+    mt.assertOk(true)
+    mt.cookie('name1', 'value')
+    mt.assertOk(true)
+    mt.get('/one', function(mt) {
+      test.equal(mt.ntf.httpOpts.headers.cookie, 'name1=value; name2=value2')
+      mt.statusCode(404)
+      mt.assertEqual(true)
+      mt.json({ message: 'not found' })
+      mt.assertOk(true)
+      mt.assertDeepEqual(true)
+      mt.jsonPath('$.message', 'not found')
+      mt.assertDeepEqual(true)
+      mt.get('/two', function(mt) {
+        test.equal(mt.ntf.httpOpts.headers.cookie, 'name1=value1; name2=value2')
+        mt.statusCode(200)
+        mt.assertEqual(true)
+        test.done()
+      })
+    })
+  })
 }

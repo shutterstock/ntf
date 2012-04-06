@@ -56,3 +56,12 @@ var AssertTest = exports.AssertTest = function(test, module) {
 
 AssertTest.prototype = new Test()
 AssertTest.prototype.constructor = AssertTest
+
+var HttpAssertTest = exports.HttpAssertTest = function(test, module) {
+  this._ntf = { meta: {}, teardown: [], parentOpts: {} }
+  this.ntf = {}
+  return AssertTest.call(this, test, module)
+}
+
+HttpAssertTest.prototype = new Test()
+HttpAssertTest.prototype.constructor = HttpAssertTest
