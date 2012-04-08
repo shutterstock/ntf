@@ -131,7 +131,7 @@ __Arguments__
 
 __Example__
 
-    exports.ns = dns.mx('ns.dns.ntfjs.org', function(test) {
+    exports.ns = dns.ns('ns.dns.ntfjs.org', function(test) {
       test.name('ns1.dns.ntfjs.org')
       test.done()
     })

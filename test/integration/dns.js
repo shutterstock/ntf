@@ -21,12 +21,12 @@ exports.mx = dns.mx('mx.dns.ntfjs.org', function(test) {
   test.done()
 })
 
-exports.ns = dns.mx('ns.dns.ntfjs.org', function(test) {
+exports.ns = dns.ns('ns.dns.ntfjs.org', function(test) {
   test.name('ns1.dns.ntfjs.org')
   test.done()
 })
 
-exports.ptr = dns.mx('50.116.49.237', function(test) {
+exports.ptr = dns.ptr('50.116.49.237', function(test) {
   test.name('hub.sewell.org')
   test.done()
 })
