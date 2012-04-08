@@ -54,7 +54,7 @@ Test DNS records.
 <a name="dns-test-a" />
 ### dns.a(name, callback)
 
-Resolve a DNS address record.
+Resolve an IPv4 address record.
 
 __Arguments__
 
@@ -63,8 +63,126 @@ __Arguments__
 
 __Example__
 
-    dns.a('example.org', function(test) {
-      test.address('207.97.227.245')
+    exports.a = dns.a('a.dns.ntfjs.org', function(test) {
+      test.address('127.0.0.1')
+      test.done()
+    })
+
+<a name="dns-test-aaaa" />
+### dns.aaaa(name, callback)
+
+Resolve an IPv6 address record.
+
+__Arguments__
+
+* name - A string to resolve.
+* callback(test) - A test callback.
+
+__Example__
+
+    exports.aaaa = dns.aaaa('aaaa.dns.ntfjs.org', function(test) {
+      test.address('::1')
+      test.done()
+    })
+
+<a name="dns-test-cname" />
+### dns.cname(name, callback)
+
+Resolve a canonical name record.
+
+__Arguments__
+
+* name - A string to resolve.
+* callback(test) - A test callback.
+
+__Example__
+
+    exports.cname = dns.cname('cname.dns.ntfjs.org', function(test) {
+      test.name('a.dns.ntfjs.org')
+      test.done()
+    })
+
+<a name="dns-test-mx" />
+### dns.mx(name, callback)
+
+Resolve a mail exchange record.
+
+__Arguments__
+
+* name - A string to resolve.
+* callback(test) - A test callback.
+
+__Example__
+
+    exports.mx = dns.mx('mx.dns.ntfjs.org', function(test) {
+      test.name('mx1.dns.ntfjs.org')
+      test.done()
+    })
+
+<a name="dns-test-ns" />
+### dns.ns(name, callback)
+
+Resolve a name server record.
+
+__Arguments__
+
+* name - A string to resolve.
+* callback(test) - A test callback.
+
+__Example__
+
+    exports.ns = dns.mx('ns.dns.ntfjs.org', function(test) {
+      test.name('ns1.dns.ntfjs.org')
+      test.done()
+    })
+
+<a name="dns-test-ptr" />
+### dns.ptr(name, callback)
+
+Resolve a pointer record.
+
+__Arguments__
+
+* name - A string to resolve.
+* callback(test) - A test callback.
+
+__Example__
+
+    exports.ptr = dns.ptr('50.116.49.237', function(test) {
+      test.name('hub.sewell.org')
+      test.done()
+    })
+
+<a name="dns-test-srv" />
+### dns.srv(name, callback)
+
+Resolve a service location record.
+
+__Arguments__
+
+* name - A string to resolve.
+* callback(test) - A test callback.
+
+__Example__
+
+    exports.srv = dns.srv('_ntfjs', function(test) {
+      test.name('srv1.dns.ntfjs.org')
+      test.done()
+    })
+
+<a name="dns-test-txt" />
+### dns.txt(name, callback)
+
+Resolve a text record.
+
+__Arguments__
+
+* name - A string to resolve.
+* callback(test) - A test callback.
+
+__Example__
+
+    exports.txt = dns.txt('_ntfjs', function(test) {
       test.done()
     })
 
