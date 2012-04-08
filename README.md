@@ -326,6 +326,73 @@ __Example__
       test.done()
     })
 
+<a name="http-assert-body" />
+### test.body([match[, compare...]])
+
+Tests `match` against body and returns result.
+
+__Arguments__
+
+* match
+   * RegExp - asserts body matches RegExp
+      * compare {String} - compared against match result
+      * return {Array,null} - RegExp match result
+   * String - asserts body contains match
+      * return {Integer} - first position of matched result
+   * undefined
+      * return {String,undefined} - body String
+
+__Example__
+
+    exports.get = http.get('/', function(test) {
+      test.body(/<title>(.*)<\/title>/, 'ntf')
+      test.done()
+    })
+
+<a name="http-assert-cookie" />
+### test.cookie([name[, match]])
+
+Tests cookie existence/value and returns match.
+
+__Arguments__
+
+* name {String} - cookie name
+* match
+   * RegExp - asserts value matches RegExp
+      * return {Array,null} - RegExp match result
+   * String - asserts value matches String
+   * undefined
+      * return {Object,undefined} - cookie object
+
+__Example__
+
+    exports.get = http.get('/', function(test) {
+      test.cookie('sid', /^[a-f0-9]+$/)
+      test.done()
+    })
+
+<a name="http-assert-header" />
+### test.header([name[, match]])
+
+Tests header existence/value and returns match.
+
+__Arguments__
+
+* name {String} - header name
+* match
+   * RegExp - asserts value matches RegExp
+      * return {Array,null} - RegExp match result
+   * String - asserts value matches String
+   * undefined
+      * return {Object,undefined} - header object
+
+__Example__
+
+    exports.get = http.get('/', function(test) {
+      test.header('Content-Type', 'text/html')
+      test.done()
+    })
+
 ## License
 
 This work is licensed under the MIT License (see the LICENSE file).
