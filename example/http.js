@@ -4,6 +4,6 @@ var ntf = require('../lib')
 exports.homepage = test.get('/', function(test) {
   test.statusCode(200)
   test.header('Server', /nginx\/[\d.]+/)
-  test.body('ntf')
+  test.body(/<title>(.*)<\/title>/, 'ntf2')
   test.done()
 })

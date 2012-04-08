@@ -109,6 +109,23 @@ exports.assertsBody = function(test) {
   mockTest.body(/world$/)
   mockTest.assertOk()
 
+  mockTest.ntf = { body: 'one two' }
+  mockTest.body(/^one (.*) three$/, 'two')
+  mockTest.assertOk(false)
+  mockTest.assertEqual(false)
+
+  mockTest.ntf = { body: 'one fail three' }
+  mockTest.body(/^one (.*) three$/, 'two')
+  mockTest.assertOk()
+  mockTest.assertEqual(false)
+
+  mockTest.ntf = { body: 'zero one two three' }
+  mockTest.body(/^zero (.*) (.*) (.*)/, 'one', 'two', 'three')
+  mockTest.assertOk()
+  mockTest.assertEqual()
+  mockTest.assertEqual()
+  mockTest.assertEqual()
+
   test.done()
 }
 
