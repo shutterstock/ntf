@@ -34,7 +34,7 @@ Run the tests
 
 ### [HTTP](#http)
 
-  * Test: [del](#http-test-del), [get](#http-test-get), [post](#http-test-post), [put](#http-test-put)
+  * Test: [request](#http-test-request), [del](#http-test-del), [get](#http-test-get), [post](#http-test-post), [put](#http-test-put)
   * Assert: [body](#http-assert-body), [cookie](#http-assert-cookie), [header](#http-assert-header), [json](#http-assert-json), [jsonPath](#http-assert-jsonPath), [statusCode](#http-assert-statusCode)
 
 ### [Socket](#socket)
@@ -48,8 +48,7 @@ Run the tests
 Test DNS records.
 
     var ntf = require('ntf')
-
-    dns = ntf.dns()
+      , dns = ntf.dns()
 
 <a name="dns-test-a" />
 ### dns.a(name, callback)
@@ -58,8 +57,8 @@ Resolve an IPv4 address record.
 
 __Arguments__
 
-* name - A string to resolve.
-* callback(test) - A test callback.
+* name {String} - name to resolve
+* callback(test) {Function} - test callback
 
 __Example__
 
@@ -75,8 +74,8 @@ Resolve an IPv6 address record.
 
 __Arguments__
 
-* name - A string to resolve.
-* callback(test) - A test callback.
+* name {String} - name to resolve
+* callback(test) {Function} - test callback
 
 __Example__
 
@@ -92,8 +91,8 @@ Resolve a canonical name record.
 
 __Arguments__
 
-* name - A string to resolve.
-* callback(test) - A test callback.
+* name {String} - canonical name to resolve
+* callback(test) {Function} - test callback
 
 __Example__
 
@@ -109,8 +108,8 @@ Resolve a mail exchange record.
 
 __Arguments__
 
-* name - A string to resolve.
-* callback(test) - A test callback.
+* name {String} - mail exchange to resolve
+* callback(test) {Function} - test callback
 
 __Example__
 
@@ -126,8 +125,8 @@ Resolve a name server record.
 
 __Arguments__
 
-* name - A string to resolve.
-* callback(test) - A test callback.
+* name {String} - name server to resolve
+* callback(test) {Function} - test callback
 
 __Example__
 
@@ -137,14 +136,14 @@ __Example__
     })
 
 <a name="dns-test-ptr" />
-### dns.ptr(name, callback)
+### dns.ptr(ip, callback)
 
 Resolve a pointer record.
 
 __Arguments__
 
-* name - A string to resolve.
-* callback(test) - A test callback.
+* name {String} - IP address to resolve
+* callback(test) {Function} - test callback
 
 __Example__
 
@@ -160,8 +159,8 @@ Resolve a service location record.
 
 __Arguments__
 
-* name - A string to resolve.
-* callback(test) - A test callback.
+* name {String} - service to resolve
+* callback(test) {Function} - test callback
 
 __Example__
 
@@ -177,8 +176,8 @@ Resolve a text record.
 
 __Arguments__
 
-* name - A string to resolve.
-* callback(test) - A test callback.
+* name {String} - text to resolve
+* callback(test) {Function} - test callback
 
 __Example__
 
@@ -193,7 +192,7 @@ Assert answer contains IP address.
 
 __Arguments__
 
-* ip - A string to check.
+* ip {String} - IP address to check
 
 __Example__
 
@@ -209,12 +208,46 @@ Assert answer contains name.
 
 __Arguments__
 
-* name - A string to check.
+* name {String} - name to check
 
 __Example__
 
     exports.cname = dns.cname('cname.dns.ntfjs.org', function(test) {
       test.name('a.dns.ntfjs.org')
+      test.done()
+    })
+
+<a name="http" />
+## HTTP
+
+Test HTTP requests.
+
+    var ntf = require('ntf')
+      , http = ntf.http('http://http.ntfjs.org')
+
+<a name="http-test-request" />
+### http.request(options, callback)
+
+Execute an HTTP request.
+
+__Arguments__
+
+* options {Object,String} - options or path/URL
+  * auth {String} - username and password (ex: "user:pass")
+  * body {Object,String} - request body
+  * cookie {Object} - cookie names and values (ex: { "sid": "2bf74f" })
+  * header {object} - header names and values (ex: { "content-type": "application/json" })
+  * jar {Boolean} - persist cookies in sub-requests
+  * method {String} - HTTP method (delete, get, post, put)
+  * timeout {Integer} - maximum number of milliseconds request can take before its killed
+  * type {String} - encodes body and sets content-type header (form, json)
+  * url {String} - path or URL
+* callback(test) {Function} - test callback
+
+__Example__
+
+    exports.request = http.request('/', function(test) {
+      test.statusCode(200)
       test.done()
     })
 
