@@ -14,7 +14,7 @@
     "type": "git",
     "url": "http://github.com/silas/ntf.git"
   },
-  "bugs" : { "url" : "http://github.com/silas/ntf/issues" },
-  "bin" : { "ntf" : "./bin/ntf" },
+  "bugs": { "url": "http://github.com/silas/ntf/issues" },
+  "bin": { "ntf": "./bin/ntf" },
   "main": "./lib/index"
 }
