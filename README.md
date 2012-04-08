@@ -230,13 +230,14 @@ Test HTTP requests.
 
 Execute an HTTP request.
 
+<a name="http-test-request-arguments" />
 __Arguments__
 
 * options {Object,String} - options or path/URL
   * auth {String} - username and password (ex: "user:pass")
   * body {Object,String} - request body
   * cookie {Object} - cookie names and values (ex: { "sid": "2bf74f" })
-  * header {object} - header names and values (ex: { "content-type": "application/json" })
+  * header {Object} - header names and values (ex: { "content-type": "application/json" })
   * jar {Boolean} - persist cookies in sub-requests
   * method {String} - HTTP method (delete, get, post, put)
   * timeout {Integer} - maximum number of milliseconds request can take before its killed
@@ -248,6 +249,80 @@ __Example__
 
     exports.request = http.request('/', function(test) {
       test.statusCode(200)
+      test.done()
+    })
+
+<a name="http-test-del" />
+### http.del(options, callback)
+
+Execute an HTTP delete request.
+
+__Arguments__
+
+* options {Object,String} - see [request arguments](#http-test-request-arguments)
+  * method {String} - always set to delete
+* callback(test) {Function} - test callback
+
+__Example__
+
+    exports.del = http.del('/delete', function(test) {
+      test.statusCode(200)
+      test.done()
+    })
+
+<a name="http-test-get" />
+### http.get(options, callback)
+
+Execute an HTTP get request.
+
+__Arguments__
+
+* options {Object,String} - see [request arguments](#http-test-request-arguments)
+  * method {String} - always set to get
+* callback(test) {Function} - test callback
+
+__Example__
+
+    exports.get = http.get('/get', function(test) {
+      test.statusCode(200)
+      test.done()
+    })
+
+<a name="http-test-post" />
+### http.post(options, callback)
+
+Execute an HTTP post request.
+
+__Arguments__
+
+* options {Object} - see [request arguments](#http-test-request-arguments)
+  * body {Object,String} - should be object by default (see type below)
+  * method {String} - always set to post
+  * type {String} - defaults to form
+* callback(test) {Function} - test callback
+
+__Example__
+
+    exports.post = http.post({ url: '/post', body: { 'q': 'test' } }), function(test) {
+      test.statusCode(201)
+      test.done()
+    })
+
+<a name="http-test-put" />
+### http.put(options, callback)
+
+Execute an HTTP put request.
+
+__Arguments__
+
+* options {Object} - see [request arguments](#http-test-request-arguments)
+  * method {String} - always set to put
+* callback(test) {Function} - test callback
+
+__Example__
+
+    exports.put = http.put({ url: '/put', body: 'put' }), function(test) {
+      test.statusCode(201)
       test.done()
     })
 
