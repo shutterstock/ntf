@@ -27,11 +27,20 @@ Run the tests
 
 ## Documentation
 
-[DNS](#dns): [a](#dns-a), [aaaa](#dns-aaaa), [cname](#dns-cname), [mx](#dns-mx), [ns](#dns-ns), [ptr](#dns-ptr), [srv](#dns-srv), [txt](#dns-txt), Assert: [address](#dns-assert-address), [name](#dns-assert-name)
+### [DNS](#dns)
 
-[HTTP](#http): [del](#http-del), [get](#http-get), [post](#http-post), [put](#http-put), Assert: [body](#http-assert-body), [cookie](#http-assert-cookie), [header](#http-assert-header), [json](#http-assert-json), [jsonPath](#http-assert-jsonPath), [statusCode](#http-assert-statusCode)
+  * Test: [a](#dns-test-a), [aaaa](#dns-test-aaaa), [cname](#dns-test-cname), [mx](#dns-test-mx), [ns](#dns-test-ns), [ptr](#dns-test-ptr), [srv](#dns-test-srv), [txt](#dns-test-txt)
+  * Assert: [address](#dns-assert-address), [name](#dns-assert-name)
 
-[Socket](#socket), [tcp](#socket-tcp), Assert: [connect](#socket-assert-connect)
+### [HTTP](#http)
+
+  * Test: [del](#http-test-del), [get](#http-test-get), [post](#http-test-post), [put](#http-test-put)
+  * Assert: [body](#http-assert-body), [cookie](#http-assert-cookie), [header](#http-assert-header), [json](#http-assert-json), [jsonPath](#http-assert-jsonPath), [statusCode](#http-assert-statusCode)
+
+### [Socket](#socket)
+
+  * Test: [tcp](#socket-test-tcp)
+  * Assert: [connect](#socket-assert-connect)
 
 <a name="dns" />
 ## DNS
@@ -42,7 +51,7 @@ Test DNS records.
 
     dns = ntf.dns()
 
-<a name="dns-a" />
+<a name="dns-test-a" />
 ### dns.a(name, callback)
 
 Resolve a DNS address record.
