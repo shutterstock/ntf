@@ -186,6 +186,38 @@ __Example__
       test.done()
     })
 
+<a name="dns-assert-address" />
+### test.address(ip)
+
+Assert answer contains IP address.
+
+__Arguments__
+
+* ip - A string to check.
+
+__Example__
+
+    exports.a = dns.a('a.dns.ntfjs.org', function(test) {
+      test.address('127.0.0.1')
+      test.done()
+    })
+
+<a name="dns-assert-name" />
+### test.name(name)
+
+Assert answer contains name.
+
+__Arguments__
+
+* name - A string to check.
+
+__Example__
+
+    exports.cname = dns.cname('cname.dns.ntfjs.org', function(test) {
+      test.name('a.dns.ntfjs.org')
+      test.done()
+    })
+
 ## License
 
 This work is licensed under the MIT License (see the LICENSE file).
