@@ -45,16 +45,42 @@ Run the tests
    * [post](#http-post)
    * [put](#http-put)
    * Assert
-      * [statusCode](#http-assert-statusCode)
-      * [header](#http-assert-header)
       * [body](#http-assert-body)
       * [cookie](#http-assert-cookie)
+      * [header](#http-assert-header)
       * [json](#http-assert-json)
       * [jsonPath](#http-assert-jsonPath)
+      * [statusCode](#http-assert-statusCode)
 * [Socket](#socket)
    * [tcp](#socket-tcp)
    * Assert
       * [connect](#socket-assert-connect)
+
+<a name="dns" />
+### DNS
+
+Test DNS records.
+
+    var ntf = require('ntf')
+
+    dns = ntf.dns()
+
+<a name="dns-a" />
+#### dns.a(name, callback)
+
+Resolve a DNS address record.
+
+__Arguments__
+
+* name - A string to resolve.
+* callback(test) - A test callback.
+
+__Example__
+
+    dns.a('example.org', function(test) {
+      test.address('207.97.227.245')
+      test.done()
+    })
 
 ## License
 
