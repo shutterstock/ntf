@@ -35,7 +35,7 @@ Run the tests
 ### [HTTP](#http)
 
   * Test: [request](#http-test-request), [del](#http-test-del), [get](#http-test-get), [post](#http-test-post), [put](#http-test-put)
-  * Assert: [body](#http-assert-body), [cookie](#http-assert-cookie), [header](#http-assert-header), [json](#http-assert-json), [jsonPath](#http-assert-jsonPath), [statusCode](#http-assert-statusCode)
+  * Assert: [body](#http-assert-body), [cookie](#http-assert-cookie), [header](#http-assert-header), [json](#http-assert-json), [jsonPath](#http-assert-json-path), [statusCode](#http-assert-status-code)
 
 ### [Socket](#socket)
 
