@@ -25,6 +25,7 @@ Run the tests
 
     ntf ntfjs.org.js
 
+<a name="documentation" />
 ## Documentation
 
 ### [DNS](#dns)
@@ -441,6 +442,45 @@ __Example__
 
     exports.get = http.get('/', function(test) {
       test.statusCode(200)
+      test.done()
+    })
+
+<a name="socket" />
+## Socket
+
+Test socket connections.
+
+    var ntf = require('ntf')
+      , socket = ntf.socket('ntfjs.org')
+
+<a name="socket-test-tcp" />
+### socket.tcp(port, callback)
+
+Open TCP connection to host and port.
+
+__Arguments__
+
+* options {Integer,Object} - port or options
+  * port {Integer} - port
+  * timeout {Integer} - maximum number of milliseconds before connection is killed
+* callback(test) {Function} - test callback
+
+__Example__
+
+    exports.tcp = socket.tcp(25, function(test) {
+      test.connect()
+      test.done()
+    })
+
+<a name="socket-assert-connect" />
+### test.connect(code)
+
+Tests connection was opened.
+
+__Example__
+
+    exports.tcp = socket.tcp(25, function(test) {
+      test.connect()
       test.done()
     })
 
