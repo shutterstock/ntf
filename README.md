@@ -335,7 +335,7 @@ __Arguments__
 
 * match
    * RegExp - asserts body matches RegExp
-      * compare {String} - compared against match result
+      * compare {String} - compare against match results
       * return {Array,null} - RegExp match result
    * String - asserts body contains match
       * return {Integer} - first position of matched result
@@ -390,6 +390,57 @@ __Example__
 
     exports.get = http.get('/', function(test) {
       test.header('Content-Type', 'text/html')
+      test.done()
+    })
+
+<a name="http-assert-json" />
+### test.json([match])
+
+Tests body against match and returns parsed JSON.
+
+__Arguments__
+
+* match - deep equal assert against match
+* return - parsed JSON object
+
+__Example__
+
+    exports.get = http.get('/', function(test) {
+      test.json({ one: 'two' })
+      test.done()
+    })
+
+<a name="http-assert-json-path" />
+### test.jsonPath([path[, compare...]])
+
+Tests json path against compares and returns result.
+
+__Arguments__
+
+* path {String} - json path ([examples](https://github.com/s3u/JSONPath#readme))
+* compare - compare against json path results
+* return {Array} - parsed JSON object
+
+__Example__
+
+    exports.get = http.get('/', function(test) {
+      test.jsonPath('$.book.title', 'Second Foundation', "The Wise Man's Fear")
+      test.done()
+    })
+
+<a name="http-assert-status-code" />
+### test.statusCode(code)
+
+Tests response status code.
+
+__Arguments__
+
+* code {Integer} - status code
+
+__Example__
+
+    exports.get = http.get('/', function(test) {
+      test.statusCode(200)
       test.done()
     })
 
