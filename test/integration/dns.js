@@ -1,41 +1,42 @@
 var ntf = require('../../lib')
   , dns = ntf.dns()
 
-exports.a = dns.a('a.dns.ntfjs.org', function(test) {
-  test.address('127.0.0.1')
+exports.a = dns.a('google-public-dns-a.google.com', function(test) {
+  test.address('8.8.8.8')
   test.done()
 })
 
-exports.aaaa = dns.aaaa('aaaa.dns.ntfjs.org', function(test) {
-  test.address('::1')
+exports.aaaa = dns.aaaa('google-public-dns-a.google.com', function(test) {
+  test.address('2001:4860:4860::8888')
   test.done()
 })
 
-exports.cname = dns.cname('cname.dns.ntfjs.org', function(test) {
-  test.name('a.dns.ntfjs.org')
+exports.cname = dns.cname('www.google.com', function(test) {
+  test.name('www.l.google.com')
   test.done()
 })
 
-exports.mx = dns.mx('mx.dns.ntfjs.org', function(test) {
-  test.name('mx1.dns.ntfjs.org')
+exports.mx = dns.mx('gmail.com', function(test) {
+  test.name('gmail-smtp-in.l.google.com')
   test.done()
 })
 
-exports.ns = dns.ns('ns.dns.ntfjs.org', function(test) {
-  test.name('ns1.dns.ntfjs.org')
+exports.ns = dns.ns('google.com', function(test) {
+  test.name('ns1.google.com')
   test.done()
 })
 
-exports.ptr = dns.ptr('50.116.49.237', function(test) {
-  test.name('hub.sewell.org')
+exports.ptr = dns.ptr('8.8.8.8', function(test) {
+  test.name('google-public-dns-a.google.com')
   test.done()
 })
 
-exports.srv = dns.srv('_ntfjs', function(test) {
-  test.name('srv1.dns.ntfjs.org')
+exports.srv = dns.srv('_jabber._tcp.google.com', function(test) {
+  test.name('xmpp-server.l.google.com')
   test.done()
 })
 
-exports.txt = dns.txt('_ntfjs', function(test) {
+exports.txt = dns.txt('google.com', function(test) {
+  test.ok(test.answer()[0].match(/^v=spf1/))
   test.done()
 })
