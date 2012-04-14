@@ -2,7 +2,7 @@ var dns = require('../lib/dns')
   , mock = require('./assets/mock')
 
 exports.asserts = function(test) {
-  test.equal(Object.keys(dns.asserts).length, 2)
+  test.equal(Object.keys(dns.asserts).length, 3)
   test.done()
 }
 
@@ -37,6 +37,21 @@ exports.assertsAddress = function(test) {
   mockTest.ntf = { res: { type: 'aaaa', answer: ['127.0.0.1'] } }
   mockTest.address(address)
   mockTest.assertOk()
+
+  test.done()
+}
+
+exports.assertsAnswer = function(test) {
+  var mockTest = new mock.AssertTest(test, dns)
+
+  mockTest.ntf = {}
+  test.strictEqual(mockTest.answer(), undefined)
+
+  mockTest.ntf = { res: {} }
+  test.strictEqual(mockTest.answer(), undefined)
+
+  mockTest.ntf = { res: { answer: [] } }
+  test.deepEqual(mockTest.answer(), [])
 
   test.done()
 }
