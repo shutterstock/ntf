@@ -2,6 +2,7 @@
   "name": "ntf",
   "description": "Network Testing Framework",
   "version": "0.10.0",
+  "author": "Silas Sewell <silas@sewell.org>",
   "engines": { "node": ">= 0.4" },
   "dependencies": {
     "JSONPath": ">= 0.8.5",
@@ -16,5 +17,5 @@
   },
   "bugs": { "url": "http://github.com/silas/ntf/issues" },
   "bin": { "ntf": "./bin/ntf" },
-  "main": "./lib/index"
+  "main": "./lib"
 }
