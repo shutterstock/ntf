@@ -356,6 +356,52 @@ exports.head = function(test) {
   })
 }
 
+exports.options = function(test) {
+  var mt = new mock.HttpAssertTest(test, http)
+    , opts = { url: 'http://example.org' }
+
+  mt._ntf.parentOpts = opts
+
+  nock(opts.url)
+    .intercept('/', 'OPTIONS', '', {})
+    .reply(200, 'root')
+    .intercept('/one', 'OPTIONS', '', {})
+    .reply(404, 'one')
+
+  http.options(mt, opts, function(mt) {
+    mt.statusCode(200)
+    mt.assertEqual(true)
+    mt.options('/one', function(mt) {
+      mt.statusCode(404)
+      mt.assertEqual(true)
+      test.done()
+    })
+  })
+}
+
+exports.patch = function(test) {
+  var mt = new mock.HttpAssertTest(test, http)
+    , opts = { url: 'http://example.org' }
+
+  mt._ntf.parentOpts = opts
+
+  nock(opts.url)
+    .intercept('/', 'PATCH', '', {})
+    .reply(200, 'root')
+    .intercept('/one', 'PATCH', '', {})
+    .reply(404, 'one')
+
+  http.patch(mt, opts, function(mt) {
+    mt.statusCode(200)
+    mt.assertEqual(true)
+    mt.patch('/one', function(mt) {
+      mt.statusCode(404)
+      mt.assertEqual(true)
+      test.done()
+    })
+  })
+}
+
 exports.post = function(test) {
   var mt = new mock.HttpAssertTest(test, http)
     , opts = { url: 'http://example.org' }
@@ -372,6 +418,29 @@ exports.post = function(test) {
     mt.statusCode(200)
     mt.assertEqual(true)
     mt.post('/one', function(mt) {
+      mt.statusCode(404)
+      mt.assertEqual(true)
+      test.done()
+    })
+  })
+}
+
+exports.put = function(test) {
+  var mt = new mock.HttpAssertTest(test, http)
+    , opts = { url: 'http://example.org' }
+
+  mt._ntf.parentOpts = opts
+
+  nock(opts.url)
+    .put('/')
+    .reply(200, 'root')
+    .put('/one')
+    .reply(404, 'one')
+
+  http.put(mt, opts, function(mt) {
+    mt.statusCode(200)
+    mt.assertEqual(true)
+    mt.put('/one', function(mt) {
       mt.statusCode(404)
       mt.assertEqual(true)
       test.done()

@@ -37,7 +37,7 @@ Run the tests
 
 ### [HTTP](#http)
 
-  * Test: [request](#http-test-request), [del](#http-test-del), [get](#http-test-get), [head](#http-test-head), [post](#http-test-post), [put](#http-test-put)
+  * Test: [request](#http-test-request), [del](#http-test-del), [get](#http-test-get), [head](#http-test-head), [options](#http-test-options), [patch](#http-test-patch), [post](#http-test-post), [put](#http-test-put)
   * Assert: [body](#http-assert-body), [cookie](#http-assert-cookie), [header](#http-assert-header), [json](#http-assert-json), [jsonPath](#http-assert-json-path), [statusCode](#http-assert-status-code)
 
 ### [Socket](#socket)
@@ -299,12 +299,48 @@ Execute an HTTP head request.
 __Arguments__
 
 * options {Object,String} - see [request arguments](#http-test-request-arguments)
-  * method {String} - always set to get
+  * method {String} - always set to head
 * callback(test) {Function} - test callback
 
 __Example__
 
     exports.head = http.head('/head', function(test) {
+      test.statusCode(200)
+      test.done()
+    })
+
+<a name="http-test-options" />
+### http.options(options, callback)
+
+Execute an HTTP options request.
+
+__Arguments__
+
+* options {Object,String} - see [request arguments](#http-test-request-arguments)
+  * method {String} - always set to options
+* callback(test) {Function} - test callback
+
+__Example__
+
+    exports.options = http.options('/options', function(test) {
+      test.statusCode(200)
+      test.done()
+    })
+
+<a name="http-test-patch" />
+### http.patch(options, callback)
+
+Execute an HTTP patch request.
+
+__Arguments__
+
+* options {Object,String} - see [request arguments](#http-test-request-arguments)
+  * method {String} - always set to patch
+* callback(test) {Function} - test callback
+
+__Example__
+
+    exports.patch = http.patch('/patch', function(test) {
       test.statusCode(200)
       test.done()
     })
