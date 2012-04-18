@@ -37,7 +37,7 @@ Run the tests
 
 ### [HTTP](#http)
 
-  * Test: [request](#http-test-request), [del](#http-test-del), [get](#http-test-get), [post](#http-test-post), [put](#http-test-put)
+  * Test: [request](#http-test-request), [del](#http-test-del), [get](#http-test-get), [head](#http-test-head), [post](#http-test-post), [put](#http-test-put)
   * Assert: [body](#http-assert-body), [cookie](#http-assert-cookie), [header](#http-assert-header), [json](#http-assert-json), [jsonPath](#http-assert-json-path), [statusCode](#http-assert-status-code)
 
 ### [Socket](#socket)
@@ -287,6 +287,24 @@ __Arguments__
 __Example__
 
     exports.get = http.get('/get', function(test) {
+      test.statusCode(200)
+      test.done()
+    })
+
+<a name="http-test-head" />
+### http.head(options, callback)
+
+Execute an HTTP head request.
+
+__Arguments__
+
+* options {Object,String} - see [request arguments](#http-test-request-arguments)
+  * method {String} - always set to get
+* callback(test) {Function} - test callback
+
+__Example__
+
+    exports.head = http.head('/head', function(test) {
       test.statusCode(200)
       test.done()
     })

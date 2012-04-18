@@ -249,7 +249,30 @@ exports.assertsCookie = function(test) {
   test.done()
 }
 
-exports.httpGet = function(test) {
+exports.del = function(test) {
+  var mt = new mock.HttpAssertTest(test, http)
+    , opts = { url: 'http://example.org' }
+
+  mt._ntf.parentOpts = opts
+
+  nock(opts.url)
+    .delete('/')
+    .reply(200, 'root')
+    .delete('/one')
+    .reply(404, 'one')
+
+  http.del(mt, opts, function(mt) {
+    mt.statusCode(200)
+    mt.assertEqual(true)
+    mt.del('/one', function(mt) {
+      mt.statusCode(404)
+      mt.assertEqual(true)
+      test.done()
+    })
+  })
+}
+
+exports.get = function(test) {
   var mt = new mock.HttpAssertTest(test, http)
     , opts = { url: 'http://example.org', jar: true }
 
@@ -306,6 +329,52 @@ exports.httpGet = function(test) {
         mt.assertEqual(true)
         test.done()
       })
+    })
+  })
+}
+
+exports.head = function(test) {
+  var mt = new mock.HttpAssertTest(test, http)
+    , opts = { url: 'http://example.org' }
+
+  mt._ntf.parentOpts = opts
+
+  nock(opts.url)
+    .head('/')
+    .reply(200, 'root')
+    .head('/one')
+    .reply(404, 'one')
+
+  http.head(mt, opts, function(mt) {
+    mt.statusCode(200)
+    mt.assertEqual(true)
+    mt.head('/one', function(mt) {
+      mt.statusCode(404)
+      mt.assertEqual(true)
+      test.done()
+    })
+  })
+}
+
+exports.post = function(test) {
+  var mt = new mock.HttpAssertTest(test, http)
+    , opts = { url: 'http://example.org' }
+
+  mt._ntf.parentOpts = opts
+
+  nock(opts.url)
+    .post('/')
+    .reply(200, 'root')
+    .post('/one')
+    .reply(404, 'one')
+
+  http.post(mt, opts, function(mt) {
+    mt.statusCode(200)
+    mt.assertEqual(true)
+    mt.post('/one', function(mt) {
+      mt.statusCode(404)
+      mt.assertEqual(true)
+      test.done()
     })
   })
 }

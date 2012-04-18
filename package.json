@@ -9,14 +9,14 @@
     "nodeunit": ">= 0.5.3"
   },
   "devDependencies": {
-    "nock": ">= 0.11.6"
+    "nock": ">= 0.12.1"
   },
   "repository": {
     "type": "git",
     "url": "http://github.com/silas/ntf.git"
   },
   "scripts": {
-    "test": "nodeunit test"
+    "test": "nodeunit test && nodeunit test/integration"
   },
   "bugs": { "url": "http://github.com/silas/ntf/issues" },
   "bin": { "ntf": "./bin/ntf" },
