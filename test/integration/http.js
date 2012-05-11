@@ -1,3 +1,6 @@
+// skip express tests on 0.7.0
+if (process.versions.node.split('.')[1] != '7') {
+
 var assets = require('./assets/http')
   , ntf = require('../../lib')
   , http = ntf.http('http://127.0.0.1:3000')
@@ -72,3 +75,5 @@ exports.postJson = http.post({ url: '/json', body: json, type: 'json' }, functio
   test.json(json)
   test.done()
 })
+
+}
