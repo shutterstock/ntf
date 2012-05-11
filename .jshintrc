@@ -2,5 +2,6 @@
   "asi": true,
   "laxbreak": true,
   "laxcomma": true,
-  "node": true
+  "node": true,
+  "strict": false
 } 
