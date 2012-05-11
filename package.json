@@ -9,6 +9,7 @@
     "nodeunit": ">= 0.5.3"
   },
   "devDependencies": {
+    "express": ">= 2.5.9",
     "jshint": ">= 0.6.1",
     "nock": ">= 0.12.1"
   },
