@@ -1,0 +1,77 @@
+---
+layout: default
+---
+<header>
+	network testing framework <span class="light">(ntf)</span>
+</header>
+
+<div id="hero">
+	<div class="intro">
+		<h1>Easy acceptance testing for your network services with Node.js</h1>
+		ntf is a suite of components to make it easy to test and monitor the state of your network services and applications.  Test HTTP, DNS, and raw sockets with high-level helper functions on top of nodeunit.  Run suites of tests continuously, and see reporting and performance trending in real time.  Open source, developed at Shutterstock.
+		<br>
+		<a class="button blue" href="https://github.com/shutterstock/ntf#readme">ntf Project on GitHub</a>
+	</div>
+<code>
+var ntf = require('ntf')
+ , test = ntf.http('http://code.shutterstock.com/ntf/')
+
+exports.home = test.get('/', function(test) {
+    test.statusCode(200)
+    test.body('ntf')
+    test.done()
+})
+</code>
+</div>
+
+<div id="components">
+	<section>
+		<div class="copy">
+			<h2>High-level HTTP, DNS, and socket testing</h2>
+			Test different types of responses for the parts you care about -- statuses, regex content matches, JSON subsets, etc
+			<br>
+			<a href="https://github.com/shutterstock/ntf#readme">ntf project &rarr;</a>
+		</div>
+		<code><b>dns</b>
+✔ root
+✔ www
+
+<b>http</b>
+✔ home
+
+<b>socket</b>
+✔ http
+
+<span class="ok">OK:</span> 7 assertions (2013ms)</code>
+	</section>
+	<section>
+		<div class="copy">
+			<h2>Run Tests Continuously</h2>
+			ntfd manages scheduling and running your suites of tests.  Handle results with plug-ins or write your own callbacks.
+			<br>
+			<a href="https://github.com/shutterstock/ntfd#readme">ntfd project &rarr;</a>
+		</div>
+<code>var ntfd = require('ntfd')
+
+ntfd({
+    path: __dirname + '/tests',
+    agent: 'test',
+    plugin: [
+        new ntfd.plugin.ConsoleEmitter()
+    ],
+    test: { interval: 10 }
+})
+
+</code>
+	</section>
+	<section>
+		<div class="copy">
+			<h2>Reporting in Real-time</h2>
+			See results from test suites in real-time via WebSockets.  Drill down for more granular test and performance data.  There's a REST API built-in too.
+			<br>
+			<a href="https://github.com/shutterstock/ntfserver#readme">ntfserver project &rarr;</a>
+		</div>
+		<img id="ntfserver_screen" src="images/ntfserver_screen.png">
+	</section>
+</div>
+<footer></footer>
