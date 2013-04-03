@@ -1,4 +1,4 @@
-ntf [![Build Status](https://secure.travis-ci.org/silas/ntf.png)](http://travis-ci.org/silas/ntf)
+ntf [![Build Status](https://secure.travis-ci.org/shutterstock/ntf.png)](http://travis-ci.org/shutterstock/ntf)
 ===
 
 ntf is a network testing framework written in [Node.js](http://nodejs.org/).
