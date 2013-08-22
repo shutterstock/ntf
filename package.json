@@ -1,7 +1,7 @@
 {
   "name": "ntf",
   "description": "Network Testing Framework",
-  "version": "0.12.1",
+  "version": "0.12.2",
   "author": "Silas Sewell <silas@sewell.org>",
   "keywords": ["dns", "http", "nodeunit", "ntf", "test"],
   "engines": { "node": ">= 0.4" },
