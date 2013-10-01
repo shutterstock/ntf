@@ -3,6 +3,9 @@ ntf [![Build Status](https://secure.travis-ci.org/shutterstock/ntf.png)](http://
 
 ntf is a network testing framework written in [Node.js](http://nodejs.org/).
 
+See [the ntf homepage](http://code.shutterstock.com/ntf/) for more details about
+the ntf framework.
+
 ## Getting Started
 
 Install ntf
