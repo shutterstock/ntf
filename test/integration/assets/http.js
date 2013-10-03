@@ -1,8 +1,9 @@
-var assert = require('assert')
+var http = require('http')
+  , assert = require('assert')
   , express = require('express')
 
 exports.createServer = function(options) {
-  var app = express.createServer()
+  var app = express();
 
   app.configure(function() {
     app.use(express.cookieParser())
@@ -46,5 +47,5 @@ exports.createServer = function(options) {
     res.json({ value: value })
   })
 
-  return app
+  return http.createServer(app)
 }

@@ -28,8 +28,8 @@ exports.getBuffer = http.get({ url: '/buffer', resEncoding: null }, function(tes
 
 exports.getCookie = http.get({ url: '/cookie', cookie: { one: 'two' } }, function(test) {
   var cookies = {
-    key: { value: 'value' },
-    'KeY-oNe': { value: 'value-two' }
+    key: { value: 'value', path: '/' },
+    'KeY-oNe': { value: 'value-two', path: '/' }
   }
   test.statusCode(200)
   test.deepEqual(test.cookie().key, cookies.key)

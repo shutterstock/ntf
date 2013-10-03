@@ -11,8 +11,8 @@ exports.aaaa = dns.aaaa('google-public-dns-a.google.com', function(test) {
   test.done()
 })
 
-exports.cname = dns.cname('www.google.com', function(test) {
-  test.name('www.l.google.com')
+exports.cname = dns.cname('chrome.google.com.', function(test) {
+  test.name('www3.l.google.com')
   test.done()
 })
 
