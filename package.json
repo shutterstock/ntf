@@ -3,7 +3,13 @@
   "description": "Network Testing Framework",
   "version": "0.12.2",
   "author": "NTF Maintainers <ntf-maintainers@shutterstock.com>",
-  "keywords": ["dns", "http", "nodeunit", "ntf", "test"],
+  "keywords": [
+    "dns",
+    "http",
+    "nodeunit",
+    "ntf",
+    "test"
+  ],
   "dependencies": {
     "nodeunit": "0.8.1"
   },
@@ -19,7 +25,12 @@
   "scripts": {
     "test": "nodeunit test && nodeunit test/integration && jshint ."
   },
-  "bugs": { "url": "http://github.com/shutterstock/ntf/issues" },
-  "bin": { "ntf": "./bin/ntf" },
-  "main": "./lib"
+  "bugs": {
+    "url": "http://github.com/shutterstock/ntf/issues"
+  },
+  "bin": {
+    "ntf": "./bin/ntf"
+  },
+  "main": "./lib",
+  "license": "MIT"
 }
