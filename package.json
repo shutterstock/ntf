@@ -20,17 +20,29 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/shutterstock/ntf.git"
+    "url": "https://github.com/shutterstock/ntf.git"
   },
   "scripts": {
     "test": "nodeunit test && nodeunit test/integration && jshint ."
   },
   "bugs": {
-    "url": "http://github.com/shutterstock/ntf/issues"
+    "url": "https://github.com/shutterstock/ntf/issues"
   },
   "bin": {
     "ntf": "./bin/ntf"
   },
   "main": "./lib",
-  "license": "MIT"
+  "license": "MIT",
+  "homepage": "https://github.com/shutterstock/ntf",
+  "contributors": [
+    "NTF Maintainers <ntf-maintainers@shutterstock.com>"
+    "Silas Sewell <silas@sewell.org>",
+    "Richard Littauer <richard.littauer@gmail.com>",
+    "Allan Feid <afeid@shutterstock.com>",
+    "Dan McCormick <dan@codeop.com>",
+    "Allan <allanfeid@gmail.com>",
+    "Zubin Tiku <rubikzube@gmail.com>",
+    "Andrew Rodland <andrew@cleverdomain.org>",
+    "Ben Kovacevich <benkovacevich@Ben-Kovacevichs-iMac.local>"
+  ]
 }
