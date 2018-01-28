@@ -244,7 +244,7 @@ __Arguments__
   * header {Object} - header names and values (ex: { "content-type": "application/json" })
   * jar {Boolean} - persist cookies in sub-requests
   * method {String} - HTTP method (delete, get, post, put)
-  * timeout {Integer} - maximum number of milliseconds request can take before its killed
+  * timeout {Integer} - maximum number of milliseconds request can take before its killed. Default: 30000.
   * type {String} - encodes body and sets content-type header (form, json)
   * url {String} - path or URL
 * callback(test) {Function} - test callback
@@ -519,7 +519,7 @@ __Arguments__
 
 * options {Integer,Object} - port or options
   * port {Integer} - port
-  * timeout {Integer} - maximum number of milliseconds before connection is killed
+  * timeout {Integer} - maximum number of milliseconds before connection is killed. Default: 30000.
 * callback(test) {Function} - test callback
 
 __Example__
